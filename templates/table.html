@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chudoclass members</title>
+</head>
+<body>
+    <B>Наши однокурсники в Facebook</B>
+	<table>
+	{% for p in persons%}
+        <tr><td>{{ p.name }}</td>
+		<td><a href="{{ p.url }}"><img src="static\fb.png"></a></td></tr>
+    {% endfor %}    
+	</table>
+	
+</body>
+</html>
