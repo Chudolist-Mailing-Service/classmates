@@ -2,33 +2,31 @@ import yaml
 import chardet
 import codecs
 
-# CLASSMATES = [
-#     {  'name':'Громова Дарья',
-#        'url':'https://www.facebook.com/gromova.da'
-#        },
-#
-#     {
-#         'name':'Слободник Алексей',
-#         'url':'https://www.facebook.com/markus.duck.90'
-#     },
-#
-#     {
-#         'name':'Головизнин Алексей',
-#         'url':'https://www.facebook.com/AirVetra'
-#     },
-#
-#     {
-#         'name':'Каминский Денис',
-#         'url':'https://www.facebook.com/dennis.kaminsky.3',
-#         'aff':'fut.ru'
-#     },
-#
-#     {
-#         'name':'Кузнецова (Ромашова) Екатерина',
-#         'url':'https://www.facebook.com/kate.romashova',
-#     }
-# ]
-
+CLASSMATES = [
+    {
+        'name': 'Громова Дарья',
+        'url': 'https://www.facebook.com/gromova.da'
+    },
+    {
+        'name': 'Слободник Алексей',
+        'url': 'https://www.facebook.com/markus.duck.90'
+    },
+    {
+        'name': 'Каминский Денис',
+        'aff': 'fut.ru',
+        'url': 'https://www.facebook.com/dennis.kaminsky.3'
+    },
+    {
+        'name': 'Головизнин Алексей',
+        'aff': 'Кант',
+        'url': 'https://www.facebook.com/AirVetra'
+    },
+    {
+        'name': 'Кузнецова (Ромашова) Екатерина',
+        'aff': 'РФПИ',
+        'url': 'https://www.facebook.com/kate.romashova'
+    }
+]
 
 def loadfile(name, encoding=None, **kwargs):
     with open(name, 'rb') as content_file:
@@ -46,7 +44,18 @@ def dumps(data, encoding=None, **kwargs):
     return res
 
 FB_PREFIX = "https://www.facebook.com/"
-CLASSMATES = loadfile('classmates.txt', encoding='cp1251')
+classmates = loadfile('classmates.txt')
+
+for i in range(0, len(CLASSMATES)):
+    C = CLASSMATES[i]
+    try:
+        c = classmates[i]
+        assert(C.__eq__(c))
+    except AssertionError:
+        raise Exception('%s is not equal to constant %s' % (c, C))
+    except IndexError:
+        raise
+
 # currently get an error:  
 # yaml.scanner.ScannerError: mapping values are not allowed here
 # in "classmates.txt", line 2, column 5
