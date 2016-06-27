@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chudoclass members</title>
-</head>
-<body>
-    <B>Наши однокурсники в Facebook</B>
-	<table>
-	{% for p in persons%}
-        <tr><td>{{ p.name }}</td>
-		<td><a href="{{ p.url }}"><img src="static\fb.png"></a></td></tr>
-    {% endfor %}    
-	</table>
-	
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %} Chudoclass members {% endblock %}
+{% block content %}
+    <h2>Наши однокурсники в Facebook</h2>
+    <table class="table table-bordered table-striped table-condensed" style="width: auto !important;">
+        <thead>
+        <tr>
+            <th> Name </th>
+            <th> Link </th>
+        </tr>
+
+        </thead>
+        <tbody>
+        {% for p in persons%}
+            <tr>
+                <td>{{ p.name }}</td>
+                <td><a href="{{ p.url }}"><img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
