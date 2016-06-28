@@ -5,8 +5,8 @@
     <table class="table table-bordered table-striped table-condensed" style="width: auto !important;">
         <thead>
         <tr>
-            <th> Name </th>
-            <th> Link </th>
+            <th> Кто </th>
+            <th> Ссылки </th>
         </tr>
 
         </thead>
@@ -14,7 +14,7 @@
         {% for p in persons%}
             <tr>
                 <td>{{ p.name }}</td>
-                <td><a href="{{ p.url }}"><img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>
+                <td align=center><a href="{{ p.url }}"><img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>
             </tr>
         {% endfor %}
         </tbody>
