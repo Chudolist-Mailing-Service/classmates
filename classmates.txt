@@ -13,5 +13,5 @@
   aff: Кант
 
 - name: Кузнецова (Ромашова) Екатерина
-  url: ttps://www.facebook.com/kate.romashova
+  url: https://www.facebook.com/kate.romashova
   aff: РФПИ

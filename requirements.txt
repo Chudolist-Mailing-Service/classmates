@@ -1,6 +1,14 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+pip=8.1.2=py35_0
+python=3.5.1=4
+setuptools=23.0.0=py35_0
+vs2015_runtime=14.00.23026.0=0
+wheel=0.29.0=py35_0
+chardet==2.3.0
 click==6.6
 Flask==0.11.1
-chardet==2.3.0
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
