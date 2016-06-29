@@ -1,6 +1,4 @@
-import yaml
-import chardet
-import codecs
+from application import get_classmates 
 
 CLASSMATES = [
     {
@@ -28,16 +26,9 @@ CLASSMATES = [
     }
 ]
 
-from application import get_classmates 
+classmates = get_classmates(file = "test_yaml.txt")
 
-classmates = get_classmates()
-
-for i in range(0, len(CLASSMATES)):
-    C = CLASSMATES[i]
-    try:
-        c = classmates[i]
-        assert(C.__eq__(c))
-    except AssertionError:
-        raise Exception('%s is not equal to constant %s' % (c, C))
-    except IndexError:
-        raise
+def test_import():
+    assert len(classmates) == len(CLASSMATES)
+    for c, C in zip(classmates, CLASSMATES):
+        assert C == c
