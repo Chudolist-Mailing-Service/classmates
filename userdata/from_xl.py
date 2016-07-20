@@ -1,7 +1,11 @@
 import xlrd
 import os
 
-XL_PATH = os.path.join('userdata', 'classmates.xls')
+XL_PATH = os.path.join('classmates.xls')
+
+def read_from_csv(filename):
+    with open(filename, 'r') as csvfile:    
+        return list(csv.reader(csvfile, **FMT)) 
 
 def get_full_classlist():
     rb = xlrd.open_workbook(XL_PATH)
@@ -17,3 +21,8 @@ def get_printable():
             id = str(int(x[5]))
             yield name, id
             
+if __name__ == "__main__": 
+  k = read_from_csv('ids.csv')
+  z = list(get_full_classlist())
+  a = [x for x in z if x[4]]
+  
