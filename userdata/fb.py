@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import facebook
-
-TOKEN = "EAACEdEose0cBACcqYnLeMoX7r9FZA8IJScFVNsRrjjUQkEpVROrPWZBcZBZBobNZAa5E3cZBBJVmcMJevvv5NnOrR8vTFkZBy6b9vFZCfu7kZAnh0bEOgijGOvqsUTZBZAeZBk665iTkAtfcSNgULFUd1NAvq6Oazk70jgCrqMr41RZAV6AZDZD"
 
 C_NAMES = """Dmitry Shmelev
 Hayk Safaryan
@@ -13,7 +10,6 @@ Dmitry Ivanov
 Oleg Maz
 Anton Volodkin
 Tatiana Medvedeva
-Svetlana  Shmykova
 Павел Одеров
 Sergey  Mikhailov
 Dinara Aktasheva
@@ -125,35 +121,37 @@ Oksana Staroselskaya
 Mikhail Ivanov
 Pogrebnyak Evgeny""".split('\n')
 
+import csv
+import facebook
+
+TOKEN = "EAACEdEose0cBAHol1C7LS3B3pbulDG3AF02HZAZA5ikoNHeWf0VJxMOZBhZAwNXHVlAkWNmDSwKUvrLLTUdRcZCwdekJ07EpcgeUl1hZBivukmNrkWwL24yZAJbLc8BX0LKX07U5ZC9PBEJlexqnPavDDMBWDqoaHbHv01u9LukMjgZDZD"
+G_ID = '140514919349870/members'
+FMT = {'delimiter':';', 'lineterminator':"\n"}
 
 
+# get classmates from chudolist group 
+def yeild_classmates_from_group(access_token=TOKEN, 
+                                group_id=G_ID,
+                                names=C_NAMES):
 
-graph = facebook.GraphAPI(access_token=TOKEN)
-members = graph.get_object(id='140514919349870/members')
-print(C_NAMES)
-for m in members['data']:
-    name = m['name']
-    if name in C_NAMES:
-        #print("---")
-        #print("- " + m['name'])
-        #print("- " + m['id'])
-        #print("- " + m['name'])
-        print("\t".join([m['name'], m['id']]))
-        C_NAMES.pop(C_NAMES.index(name))
-assert len(C_NAMES) == 1
-assert C_NAMES == ['Evgeny Rybin']
+    graph = facebook.GraphAPI(access_token)
+    members = graph.get_object(id=group_id)
+    for m in members['data']:
+        name = m['name']
+        if name in names:
+            yield m['name'], m['id']
 
-my =  graph.get_object(id='me/friends')
 
-yaml_docs = """---
-- Pogrebnyak Evgeny
-- 140514919349870
-- Погребняк Евгений
----
-- Михаил Хромов
-"""
+def save_to_csv(filename, iterable):
+    with open(filename, 'w') as csvfile:
+        writer = csv.writer(csvfile, **FMT)    
+        writer.writerows(iterable)
 
-csv= "Погребняк\tЕвгений\tВладимирович\t"
+def read_from_csv(filename):
+    with open(filename, 'r') as csvfile:    
+        return list(csv.reader(csvfile, **FMT)) 
 
-import yaml
-print ([x for x in yaml.load_all(yaml_docs)])
+if __name__ == "__main__": 
+  save_to_csv(filename="_temp_ids_from_chudolist_group.csv", iterable=yeild_classmates_from_group())       
+  k = read_from_csv('ids.csv')
+        
