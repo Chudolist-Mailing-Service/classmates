@@ -2,12 +2,12 @@
 import os 
 import json
 from flask import Flask, render_template
-#from operator import itemgetter
+from operator import itemgetter
 
 
 application = Flask("application")
 MAIN_PAGE_TEMPLATE_FILE = "table.html"
-CLASSMATES_JSON_PATH = os.path.join('userdata', 'classmates.json')
+CLASSMATES_JSON_PATH = os.path.join('classmates.json')
 
 
 def get_classmates():
@@ -15,11 +15,12 @@ def get_classmates():
         return json.load(file)
         
 @application.route("/")
-def hello():
-    classmates = get_classmates()#.sort(key=itemgetter('name'))
+def hello():      
+    classmates = sorted(get_classmates(),key=itemgetter('group'))
     return render_template(MAIN_PAGE_TEMPLATE_FILE, persons=classmates)
 
 
 if __name__ == "__main__":
-    #print(get_classmates())
+    print(sorted(get_classmates(),key=itemgetter('group', 'name')))
     application.run(debug = True)
+    
