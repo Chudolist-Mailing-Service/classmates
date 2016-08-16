@@ -15,7 +15,7 @@
         {% for p in persons%}
             <tr>
 			
-			    <td><a href="user/{{ p.translit }}">{{ p.name }}</a></td>
+			    <td><a href="../user/{{ p.translit }}">{{ p.name }}</a></td>
 				<td align=center><a href="group/{{ p.group}}">{{ p.group }}</a></td>
 				
 			{% if  p.url %}
