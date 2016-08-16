@@ -6,6 +6,7 @@
         <thead>
         <tr>
             <th> Кто </th>
+			<th> Группа </th>
             <th> Ссылки </th>
         </tr>
 
@@ -13,9 +14,24 @@
         <tbody>
         {% for p in persons%}
             <tr>
+			
+			{% if  p.url %}
+			
                 <td><a href="{{ p.url }}">{{ p.name }}</a></td>
+				<td align=center>{{ p.group }}</a></td>
                 <td align=center><a href="{{ p.url }}">
-				<img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>
+				<img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>			
+			
+			{% else %}
+						
+                <td>{{ p.name }}</td>
+				<td align=center>{{ p.group }}</td>
+                <td align=center></td>
+			
+			{% endif %}
+			
+			
+
             </tr>
         {% endfor %}
         </tbody>
