@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Chudoclass members {% endblock %}
+{% block content %}
+<br>
+        
+        Name: {{ person.name }}<br> 
+       Group: {{ person.group }}<br>
+	  
+    Facebook:
+{% if  person.url %}
+				
+                <a href="{{ person.url }}">
+				<img src="{{ url_for('static', filename='img/fb.png') }}"></a>			
+			
+{% else %}
+					
+    Please add your fb informtion here.
+			
+<hr>
+	TODO:
+<ul>	
+	<li>this page has to collect user FB informtion
+	<li>the user comes to this page, if we do not have his\her id, he sees the message above "Please add your fb informtion here."
+	<li>I'm looking for simple way to collect the user information (e.g. 'like' button, OAuth login?, something else)
+    	
+
+
+
+{% endif %}
+			
+			
+			
+			
+        
+{% endblock %}
