@@ -10,11 +10,11 @@
 {% if  person.url %}
 				
                 <a href="{{ person.url }}">
-				<img src="{{ url_for('static', filename='img/fb.png') }}"></a>			
-			
+				<img src="{{ url_for('static', filename='img/fb.png') }}" /></a>
+
 {% else %}
 					
-    Please add your fb informtion here.
+    <a href="{{ url_for('oauth_authorize_facebook') }}" class="btn btn-default">Добавить Facebook</a>
 			
 <hr>
 	TODO:
