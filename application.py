@@ -5,13 +5,13 @@
 """
 
 import json
+from transliterate import translit
+
 from flask import Flask, render_template, session, request, url_for, redirect
 from operator import itemgetter
+
 from flask_oauthlib.client import OAuth, OAuthException, OAuthResponse
 from config import FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, FACEBOOK_CALLBACK
-
-# will require update to req.txt
-from transliterate import translit
 
 application = Flask("application")
 
