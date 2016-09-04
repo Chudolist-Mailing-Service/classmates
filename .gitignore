@@ -1,4 +1,4 @@
-
+app-class.txt
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

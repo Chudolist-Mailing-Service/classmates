@@ -15,28 +15,16 @@
         {% for p in persons%}
             <tr>
 			
-<<<<<<< HEAD
-			{% if  p.url %}
-			
-                <td><a href="{{ p.url }}">{{ p.name }}</a></td>
-				<td align=center>{{ p.group }}</a></td>
-=======
-			    <td><a href="user/{{ p.translit }}">{{ p.name }}</a></td>
+			    <td><a href="../user/{{ p.translit }}">{{ p.name }}</a></td>
 				<td align=center><a href="group/{{ p.group}}">{{ p.group }}</a></td>
 				
 			{% if  p.url %}
 				
->>>>>>> origin/master
                 <td align=center><a href="{{ p.url }}">
 				<img src="{{ url_for('static', filename='img/fb.png') }}"></a></td>			
 			
 			{% else %}
 						
-<<<<<<< HEAD
-                <td>{{ p.name }}</td>
-				<td align=center>{{ p.group }}</td>
-=======
->>>>>>> origin/master
                 <td align=center></td>
 			
 			{% endif %}
