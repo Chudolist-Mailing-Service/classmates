@@ -18,7 +18,7 @@ class Classmates():
     def __init__(self):
         self.people = self.load_classmates()
         
-    def get_people_dicts(self):
+    def get_people(self):
         return (self.people)
     
     def get_translit_names(self):
@@ -80,7 +80,7 @@ class Classmates():
 
 if __name__ == "__main__":
     z = Classmates()
-    assert TEST_DUMMY_DICT             == Classmates().get_people_dicts()[0]
+    assert TEST_DUMMY_DICT             == Classmates().get_people()[0]
     assert TEST_DUMMY_DICT['translit'] == Classmates().get_translit_names()[0]
     assert TEST_DUMMY_DICT             == Classmates().get_user(TEST_DUMMY_DICT['translit'])
     assert 25                          == len(Classmates().get_group_list(410)) 

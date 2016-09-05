@@ -52,7 +52,7 @@ def show_user_profile(username):
 @application.route('/group/<int:group_n>')
 def show_post(group_n):
     if group_n in [x for x in range(401,412)]:
-        return render_template(GROUP_PAGE_TEMPLATE, persons=get_group_list(group_n))
+        return render_template(GROUP_PAGE_TEMPLATE, persons=my_class.get_group_list(group_n))
     else:
         return 'Illegal group number: %d' % group_n
     
