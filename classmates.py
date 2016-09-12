@@ -28,7 +28,10 @@ CLASSMATES_JSON_PATH = 'classmates.json'
 REGISTERED_USERS_JSON_PATH = 'registered_users.json'
 TEST_DUMMY_DICT = {'translit': 'LastName_FirstName_400', 'group': '400', 'url': '', 'name': '_Фамилия1 _Имя1'} 
 
-# {'translit': 'Taljantsev_Sergej_410', 'name': 'Тальянцев Сергей', 'group': '410', 'url': 'https://www.facebook.com/1029131133789392'}
+# {'translit': 'Taljantsev_Sergej_410', 
+#      'name': 'Тальянцев Сергей', 
+#     'group': '410', 
+#       'url': 'https://www.facebook.com/1029131133789392' }
 
 def read_json(filename):
    """Return data imported from json."""
@@ -37,7 +40,7 @@ def read_json(filename):
 
 def dump_to_json(data, filename):
    with open(filename, 'w') as outfile:
-      json.dump(data, outfile)
+      json.dump(data, outfile, indent=4, separators=(',', ': '))
 
 class Classmates():
    def __init__(self):
@@ -45,14 +48,14 @@ class Classmates():
         
         # TODO: 
         # read registered_users.json
-        self.registered_facebook_ids = read_json(REGISTERED_USERS_JSON_PATH)
+        # self.registered_facebook_ids = read_json(REGISTERED_USERS_JSON_PATH)
         # replace urls in self.people for registered users 
-        for p in self.people:
-           name = p['translit']
-           if name in self.registered_facebook_ids.keys():
-              p['url'] = self.registered_facebook_ids[name]
+        # for p in self.people:
+        #   name = p['translit']
+        #   if name in self.registered_facebook_ids.keys():
+        #      p['url'] = self.registered_facebook_ids[name]
         # may also dump final full json 
-        dump_to_json(data, 'full_list.json')
+        # dump_to_json(data, 'full_list.json')
         
    def get_people(self):
         return (self.people)
@@ -144,4 +147,4 @@ if __name__ == "__main__":
     assert TEST_DUMMY_DICT['translit'] == Classmates().get_translit_names()[0]
     assert TEST_DUMMY_DICT             == Classmates().get_user(TEST_DUMMY_DICT['translit'])
     assert 25                          == len(Classmates().get_group_list(410)) 
-    
+    dump_to_json(Classmates().people, 'test.json')
