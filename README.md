@@ -2,43 +2,48 @@ Classmates - flask app holding a list of classmates:
 
 <http://chudoclass.us-west-2.elasticbeanstalk.com/>
 
-Started: 1:11 16.08.2016  
-Updated: 1:17 16.08.2016
-
-Notes:
-  - original personal data stored locally, results in classmates.json 
-
 URLs:
   - <http://52.43.77.82>
   - <http://chudoclass.us-west-2.elasticbeanstalk.com>
   - <https://github.com/epogrebnyak/classmates>
 
-Tasks
+TODOs:
 -----
 
-Local machine 
-
--  [ ] consolidate to one directory for git and aws eb
-
-Run PyCharm to program 
-
--  [ ] PyCharm
- 
-URL
-- [ ] chudoclass.ru
-- [ ] fb like for the page 
-
-More pages 1
--  [ ] 401...410
-
-More pages 2
--  [ ] personal page Dima_Ivanov_410 
--  [ ] translit_and_underscore (python library for translit) https://pypi.python.org/pypi/transliterate/1.7.6
-
-Get more data from Facebook 
--  [ ] scenario for signing into the app
-      "if you are Dima_Ivanov_410..."
+TODOs:
+	 
+    Major:
+    - [ ] app in AWS - deploy this to AWS - must change
+    
+      FACEBOOK_CALLBACK = 'http://localhost:5000/oauth/callback/facebook'
+      FACEBOOK_CALLBACK = "http://chudoclass.us-west-2.elasticbeanstalk.com/oauth/callback/facebook"
+  
+    - [ ] model is Classmates(), veiws are app urls and controller is POST function? what else should be done in MVC?
+    - [ ] we have tests for data model (test_classmates.py), but what are tests for views and controller like?
+    
+    Minor:
+    - [ ] Лучич Беляна in userdata, list on screen and in test
+    - [ ] put userdata with excel to private repo for creating classmates.json   
       
-Ideas:
-- [ ] photos
-- [ ] other classes
+    Soon:
+    - like button for entire page
+    - [ ] store and show person's photo
+    - domain name chudoclass.ru    
+    - nicer html templates
+    - more testing
+    
+    Not soon:
+    - linkedin, vkontakte links
+    - extendible to other MSU Econ classes
+    
+    MORE FB FEATURES:
+	```
+    #- analyze graph of friends:
+    #    find classmates not listed
+    #    most connected group
+    #    complete group
+    #    friendliest person
+    # - "Найди меня" - список кого мы не видим в соцсетях
+    # - авторизовать почту или сообщения в мессенджере   
+    ```
+    

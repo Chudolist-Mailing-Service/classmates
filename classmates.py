@@ -1,24 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Read classmates data from json, display as full list, by group or as individual page.
-   Also allows to collect missing information about classmates FB ids.
+"""Read classmates data from two jsons, get it as full list, by group or retrive individual user.
+   Also allows to udate user facebook ids.
+   
+   Original hardcoded user data stored in: classmates.json   
+   New data, obtained interactively stored in: registered_users.json
 """
-
-#TODO:
-#- fix 412 group error
-#- create explicitly classmates.json (from csv, csv really better)
-#- make jsons readable
-#- review this file ("model")
-
-#- list of photos by group
-#- analyze graph of friends:
-#    find classmates not listed
-#    most connected group
-#    complete group
-#    friendliest person
-# - "Найди меня"
-# - внутренний messenger - авторизовать рассылку на почту
-
 
 import json
 from transliterate import translit
@@ -26,12 +13,6 @@ from operator import itemgetter
 
 CLASSMATES_JSON_PATH = 'classmates.json'
 REGISTERED_USERS_JSON_PATH = 'registered_users.json'
-TEST_DUMMY_DICT = {'translit': 'LastName_FirstName_400', 'group': '400', 'url': '', 'name': '_Фамилия1 _Имя1'}
-
-# {'translit': 'Taljantsev_Sergej_410',
-#      'name': 'Тальянцев Сергей',
-#     'group': '410',
-#       'url': 'https://www.facebook.com/1029131133789392' }
 
 def read_json(filename):
    """Return data imported from json."""
@@ -47,7 +28,7 @@ class Classmates():
 
         #load data from main json
         self.people = read_json(CLASSMATES_JSON_PATH)
-        # order list by group and name
+        # order it by group and name
         self.people = sorted(self.people,key=itemgetter('group', 'name'))
 
         # read registered users json
@@ -68,6 +49,13 @@ class Classmates():
             raise TypeError(group_n)
 
    def get_user(self, translit_name):
+        # Return entry like below:
+        #
+        # {'translit': 'Taljantsev_Sergej_410', 
+        #      'name': 'Тальянцев Сергей',
+        #     'group': '410',
+        #       'url': 'https://www.facebook.com/1029131133789392' }
+        #
         return [p for p in self.people if p['translit'] == translit_name][0]
 
    def get_translit_names(self):
@@ -82,52 +70,6 @@ class Classmates():
        else:
            raise ValueError("Cannot assign url to missing user: " + translit_name) 
 
-       # if above does not work:
-       #for z in self.people:
-       #   if translit_name == z['translit']:
-       #      z['url'] = url
-
-       # add to file REGISTERED_USERS_JSON_PATH
+       # add new data to file REGISTERED_USERS_JSON_PATH
        self.registered_facebook_ids[translit_name] = url
        dump_to_json(self.registered_facebook_ids, REGISTERED_USERS_JSON_PATH)
-
-# def show_user_profile(username):
-    # if username in TRANSLIT_NAMES:
-        # p = pick_user_by_translit(username)
-        # session['username'] = username
-        # return render_template(USER_PAGE_TEMPLATE, person=p)
-    # else:
-        # return 'Cannot find %s' % username
-
-# def show_post(group_n):
-    # if group_n in [x for x in range(401,412)]:
-        # return render_template(GROUP_PAGE_TEMPLATE, persons=get_group_list(group_n))
-    # else:
-        # return 'Illegal group number: %d' % group_n
-
-    # session['facebook_token'] = (resp['access_token'], '')
-    # me = facebook.get('/me?fields=id')
-    # u_id = me.data['id']
-
-    # url = "https://www.facebook.com/" + u_id
-    # p = pick_user_by_translit(session['username'])
-    # p['url'] = url
-
-    # new_data = [user if user['translit']!=session['username'] else p for user in PEOPLE]
-
-    # with open('classmates.json', 'w+') as outfile:
-        # json.dump(new_data, outfile)
-
-if __name__ == "__main__":
-    dump_to_json(TEST_DUMMY_DICT, REGISTERED_USERS_JSON_PATH)
-    assert TEST_DUMMY_DICT             == Classmates().get_class()[1]
-    assert TEST_DUMMY_DICT['translit'] == Classmates().get_translit_names()[1]
-    assert TEST_DUMMY_DICT             == Classmates().get_user(TEST_DUMMY_DICT['translit'])
-    assert 25                          == len(Classmates().get_group(410))
-    r = Classmates()
-    mock_id = '1234567892'
-    mock_url = 'https://www.facebook.com/' + mock_id
-    r.set_facebook_id('LastName_FirstName_400', mock_id)
-    assert mock_url == r.get_user('LastName_FirstName_400')['url']
-    assert mock_url == Classmates().get_user('LastName_FirstName_400')['url']
-    
