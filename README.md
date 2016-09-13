@@ -9,17 +9,24 @@ URLs:
 
 TODOs:
 -----
-
-TODOs:
 	 
-    Major:
-    - [ ] app in AWS - deploy this to AWS - must change
+    Основные вопросы:
+	- как ветку get-fb-id сделать мастером? нужно мерджить как-то или переставить HEAD на get-fb-id надо?
+	  или вообще как-то не так?
+	  
+    - чтобы заработало в AWS - нужно поменять
     
-      FACEBOOK_CALLBACK = 'http://localhost:5000/oauth/callback/facebook'
+      # FACEBOOK_CALLBACK = 'http://localhost:5000/oauth/callback/facebook'
       FACEBOOK_CALLBACK = "http://chudoclass.us-west-2.elasticbeanstalk.com/oauth/callback/facebook"
-  
-    - [ ] model is Classmates(), veiws are app urls and controller is POST function? what else should be done in MVC?
-    - [ ] we have tests for data model (test_classmates.py), but what are tests for views and controller like?
+      
+	  или нужны еще какие-то изменения, с токенами, например? сейчас токены работают только для локальной версии?
+	  
+    - сделан класс Classmates() в classmates.py - это модель данных. 
+	   - есть ли по нему какие-то замечания и предложения?
+	   - правильно ли считать что url это views, а POST запросы (нажать кнопку) это контроллер? или все как-то сложнее?
+	
+    - сделаны тесты для модели данных (test_classmates.py), какие есть подходы к тестированию views и особенно 
+	  контроллера? что и как там проверяют?
     
     Minor:
     - [ ] Лучич Беляна in userdata, list on screen and in test
